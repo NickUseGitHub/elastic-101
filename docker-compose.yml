@@ -4,11 +4,22 @@ services:
   es:
     image: elasticsearch:7.5.1
     networks:
-      - eslastic_nw
+      eslastic_nw:
+        aliases:
+          - esdb
     ports: 
       - "9200:9200"
     environment:
       - discovery.type=single-node
+
+  kb:
+    image: kibana:7.5.1
+    networks:
+      - eslastic_nw
+    links:
+      - es
+    ports:
+      - "5601:5601"
 
 networks:
   eslastic_nw:
