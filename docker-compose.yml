@@ -3,7 +3,12 @@ services:
 
   es:
     image: elasticsearch:7.5.1
+    networks:
+      - eslastic_nw
     ports: 
       - "9200:9200"
     environment:
       - discovery.type=single-node
+
+networks:
+  eslastic_nw:
