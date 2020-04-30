@@ -1,9 +1,33 @@
-PUT http://localhost:9200/ngong/_doc/2 HTTP/1.1
+PUT http://localhost:9200/products HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "Eiei Naja",
-  "age": 29,
-  "height": 180,
-  "weight": 55
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "my_ngram_analyzer": {
+          "tokenizer": "my_ngram_tokenizer"
+        }
+      },
+      "tokenizer": {
+        "my_ngram_tokenizer": {
+          "type": "edgeNGram",
+          "min_gram": "3",
+          "max_gram": "5",
+          "token_chars": [
+            "letter",
+            "digit"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "Barcode": {
+        "analyzer": "my_ngram_analyzer",
+        "type": "text"
+      }
+    }
+  }
 }

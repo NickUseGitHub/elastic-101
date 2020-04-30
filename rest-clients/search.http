@@ -1,12 +1,15 @@
-POST http://localhost:9200/kibana_sample_data_ecommerce/_search HTTP/1.1
+POST http://localhost:9200/products/_search HTTP/1.1
 Content-Type: application/json
 
 {
-  "query": { 
-    "wildcard": {
-      "day_of_week": {
-        "value": "Monday"
+   "from": "0",
+   "size": "50",
+   "query": {
+      "multi_match": {
+        "query": "200",
+        "fields": [
+          "Barcode"
+        ]
       }
-    } 
-  }
+   }
 }
