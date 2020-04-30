@@ -6,10 +6,21 @@ Content-Type: application/json
    "size": "50",
    "query": {
       "multi_match": {
-        "query": "200",
+        "query": "เอสซีจี",
         "fields": [
-          "Barcode"
-        ]
+          "Barcode",
+          "Brand.thai",
+          "Brand.english",
+          "Name.thai^2",
+          "Name.english^2",
+          "Short_Description.thai",
+          "Short_Description.english",
+          "Category_Name.thai",
+          "Category_Name.english",
+          "Subcategory_Name.thai",
+          "Subcategory_Name.english"
+        ],
+        "operator": "and"
       }
    }
 }
