@@ -1,0 +1,26 @@
+POST http://localhost:9200/products/_search HTTP/1.1
+Content-Type: application/json
+
+{
+   "from": "0",
+   "size": "50",
+   "query": {
+      "multi_match": {
+        "query": "เอสซีจี",
+        "fields": [
+          "Barcode",
+          "Brand.thai",
+          "Brand.english",
+          "Name.thai^2",
+          "Name.english^2",
+          "Short_Description.thai",
+          "Short_Description.english",
+          "Category_Name.thai",
+          "Category_Name.english",
+          "Subcategory_Name.thai",
+          "Subcategory_Name.english"
+        ],
+        "operator": "and"
+      }
+   }
+}

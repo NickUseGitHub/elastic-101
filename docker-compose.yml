@@ -2,7 +2,8 @@ version: "3"
 services: 
 
   es:
-    image: elasticsearch:7.5.1
+    build:
+      context: .
     networks:
       eslastic_nw:
         aliases:

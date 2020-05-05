@@ -1,0 +1,123 @@
+PUT http://localhost:9200/products HTTP/1.1
+Content-Type: application/json
+
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "my_icu_analyzer": {
+          "tokenizer": "icu_tokenizer",
+          "filter": ["lowercase"]
+        },
+        "my_ngram_analyzer": {
+          "tokenizer": "my_ngram_tokenizer"
+        }
+      },
+      "tokenizer": {
+        "my_ngram_tokenizer": {
+          "type": "edgeNGram",
+          "min_gram": "3",
+          "max_gram": "7",
+          "token_chars": [
+            "letter",
+            "digit"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "Barcode": {
+        "analyzer": "my_ngram_analyzer",
+        "type": "text"
+      },
+      "SAP_Product_ID": {
+        "type": "keyword"
+      },
+      "CMS_ID": {
+        "type": "keyword"
+      },
+      "Name": {
+        "type": "text",
+        "fields": {
+          "english": {
+            "type": "search_as_you_type",
+            "analyzer": "english"
+          },
+          "thai": {
+            "type": "search_as_you_type",
+            "analyzer": "my_icu_analyzer"
+          }
+        }
+      },
+      "Short_Description": {
+        "type": "text",
+        "fields": {
+          "english": {
+            "type": "text",
+            "analyzer": "english"
+          },
+          "thai": {
+            "type": "text",
+            "analyzer": "my_icu_analyzer"
+          }
+        }
+      },
+      "Brand": {
+        "type": "text",
+        "fields": {
+          "english": {
+            "type": "text",
+            "analyzer": "english"
+          },
+          "thai": {
+            "type": "text",
+            "analyzer": "my_icu_analyzer"
+          }
+        }
+      },
+      "Active_Status_Website": {
+        "type": "keyword"
+      },
+      "Language": {
+        "type": "keyword"
+      },
+      "Market": {
+        "type": "keyword"
+      },
+      "Main_Image": {
+        "type": "keyword"
+      },
+      "Modified": {
+        "type": "date"
+      },
+      "Category_Name": {
+        "type": "text",
+        "fields": {
+          "english": {
+            "type": "text",
+            "analyzer": "english"
+          },
+          "thai": {
+            "type": "text",
+            "analyzer": "my_icu_analyzer"
+          }
+        }
+      },
+      "Subcategory_Name": {
+        "type": "text",
+        "fields": {
+          "english": {
+            "type": "text",
+            "analyzer": "english"
+          },
+          "thai": {
+            "type": "text",
+            "analyzer": "my_icu_analyzer"
+          }
+        }
+      }
+    }
+  }
+}
