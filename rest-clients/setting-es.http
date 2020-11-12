@@ -1,0 +1,7 @@
+PUT http://localhost:9200/_cluster/settings HTTP/1.1
+
+{
+  "gateway": {
+    "recover_after_nodes": 1
+  }
+}
